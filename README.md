@@ -1,1 +1,1 @@
-# Morph-RESTful-HTTP-Utility-API
+# Morph: A standardized RESTful Utility API
