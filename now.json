@@ -2,8 +2,11 @@
   "version": 2,
   "name": "monorepo",
   "builds": [
-      { "src": "www/package.json", "use": "@now/next" },
-      { "src": "api/python/*.py", "use": "@now/python" }
+      { "src": "www/next.config.js", "use": "@now/next" },
+      { "src": "api/go/*.go", "use": "@now/go" },
+      { "src": "api/python/*.py", "use": "@now/python" },
+      { "src": "api/php/*.php", "use": "@now/php" },
+      { "src": "api/node/*.js", "use": "@now/node" }
   ],
   "routes": [
       { "src": "/api/(.*)", "dest": "/api/$1" },
