@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "monorepo",
+  "builds": [
+      { "src": "www/package.json", "use": "@now/next" },
+      { "src": "api/python/*.py", "use": "@now/python" }
+  ],
+  "routes": [
+      { "src": "/api/(.*)", "dest": "/api/$1" },
+      { "src": "/(.*)", "dest": "/www/$1" }
+  ]
+}
