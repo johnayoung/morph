@@ -1,7 +1,7 @@
 # models.py
 from sqlalchemy import Table, Column, Integer, Text
 from sqlalchemy.orm import mapper
-from database import metadata, db_session
+from api.db.database import metadata, db_session
 
 class BlogPost(object):
     query = db_session.query_property()
