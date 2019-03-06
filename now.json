@@ -1,9 +1,9 @@
 {
-  "name": "monorepo",
+  "name": "Morph",
   "version": 2,
   "builds": [
-      { "src": "www/package.json", "use": "@now/next" },
-      { "src": "api/python/*.py", "use": "@ardent-labs/now-python-wsgi" }
+      { "src": "client/package.json", "use": "@now/static-build", "config": { "distDir": "build" } },
+      { "src": "api/python/*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
   ],
   "routes": [
       {
@@ -15,13 +15,6 @@
         "status": 302,
         "headers": {
           "location": "https://google.com"
-        }
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/www/$1",
-        "headers": {
-          "x-request-path": "$1"
         }
       }
   ]
