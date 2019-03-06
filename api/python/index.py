@@ -1,11 +1,14 @@
-import datetime
-from http.server import BaseHTTPRequestHandler
+from flask import Flask
+from flask.json import jsonify
+app = Flask(__name__)
 
-class handler(BaseHTTPRequestHandler):
+def max_n(lst, n=1, reverse=True):
+  return sorted(lst, reverse=reverse)[:n]
 
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type','text/plain')
-        self.end_headers()
-        self.wfile.write(str(datetime.datetime.now()).encode())
-        return
+@app.route("/")
+def hello():
+  return "Hello World!"
+
+@app.route("/max")
+def status():
+  return jsonify(max_n([1, 2, 3]))
