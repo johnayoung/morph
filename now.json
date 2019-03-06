@@ -4,7 +4,7 @@
   "builds": [
       { "src": "www/package.json", "use": "@now/next" },
       { "src": "api/go/*.go", "use": "@now/go" },
-      { "src": "api/python/*.py", "use": "@now/python" },
+      { "src": "api/python/*.py", "use": "@liudonghua123/now-flask" },
       { "src": "api/php/*.php", "use": "@now/php" },
       { "src": "api/node/*.js", "use": "@now/node" }
   ],
