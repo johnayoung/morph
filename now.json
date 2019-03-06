@@ -2,7 +2,6 @@
   "name": "Morph",
   "version": 2,
   "builds": [
-      { "src": "client/package.json", "use": "@now/static-build", "config": { "distDir": "build" } },
       { "src": "api/python/*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
   ],
   "routes": [
