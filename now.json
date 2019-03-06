@@ -2,19 +2,9 @@
   "name": "Morph",
   "version": 2,
   "builds": [
-      { "src": "*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
+    { "src": "*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
   ],
   "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/$1"
-      },
-      {
-        "src": "/redirect-test",
-        "status": 302,
-        "headers": {
-          "location": "https://google.com"
-        }
-      }
+    { "src": "/.*", "dest": "/"}
   ]
 }
