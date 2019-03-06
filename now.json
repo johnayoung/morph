@@ -2,7 +2,7 @@
   "name": "Morph",
   "version": 2,
   "builds": [
-      { "src": "api/python/*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
+      { "src": "*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
   ],
   "routes": [
       {
