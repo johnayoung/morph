@@ -8,4 +8,4 @@ api = Api(
   description='A standardized RESTful Utility API'
 )
 
-api.add_namespace(strings, path='/strings')
+api.add_namespace(strings, path='/api/strings')

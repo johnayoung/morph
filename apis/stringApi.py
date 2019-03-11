@@ -1,6 +1,6 @@
 from flask_restplus import Namespace, Resource, fields
 from flask import request
-import apis.strings.capitalize
+from .strings.capitalize import capitalize
 
 api = Namespace('strings', description='String related operations')
 
@@ -21,7 +21,12 @@ class Capitalize(Resource):
   @api.doc('capitalize_string')
   @api.marshal_with(string)
   def post(self):
+    """
+    Capitalizes the first letter of a string.
+
+    Capitalizes the fist letter of the sring and then adds it with rest of the string. Omit the lower_rest parameter to keep the rest of the string intact, or set it to true to convert to lowercase.
+    """
     req_data = request.get_json()
     input = req_data['input']
     output = capitalize(input)
-    return Output(output=output, function='Capitalize')  
+    return Output(output=output, function='Capitalize')
