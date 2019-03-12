@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import Input from './components/Input';
 import API from './api';
+import WIT from './utils/wit';
 import PARSE from './utils/parseSwagger';
 import TOTITLECASE from './utils/toTitleCase';
 import {getPath} from './utils/extractPath';
@@ -26,21 +28,26 @@ class App extends Component {
       const desc = post ? post.summary : get.summary;
       return {
         value: operation, 
-        label: `${TOTITLECASE(operation)} - ${desc}`
+        label: `${TOTITLECASE(operation)}`,
+        description: desc
       }
     });
     this.setState({options: allPaths})
-
-    console.log(response);
-    console.log(allPaths);
   }
 
   handleInputChange = async val => {
     const schema = yup.array();
 
     const parser = await schema.isValid(val);
-    console.log(parser);
     this.setState({morph: val})
+  }
+
+  handleIntent = async e => {
+    if(e.key === 'Enter'){
+      const {value} = e.target;
+      const wit = await WIT(value)
+      console.log(wit);
+   }
   }
   
   handleSubmit = async event => {
@@ -56,22 +63,31 @@ class App extends Component {
     return (
       <div className="container mx-auto px-2">
         <header className="mt-16 text-center">
-          <h1 className='text-yellow'>Morph</h1>
+          <h1 className='text-yellow text-5xl'>Morph</h1>
           <h2 className='text-white'>A standardized RESTful utility microservice.</h2>
         </header>
-        <main className='mt-16 text-center'>
+        <main className='mx-auto mt-16 text-center max-w-sm'>
           <section>
             <form onSubmit={this.parseSwagger}>
-              <Select 
-                autoFocus
+              {/* <CustomOption 
                 options={this.state.options}
+                onChange={val => console.log(val)}
+              /> */}
+              <Select
+                autoFocus
                 isMulti
                 closeMenuOnSelect={false}
-                menuIsOpen={true}
+                options={this.state.options}
+                placeholder='Choose your morphing mechanism...'
+                onChange={val => console.log(val)}
               />
-              {/* <Input placeholder='What should we do?' callback={val => this.handleInputChange(val)} />
-              <button type="submit" className='bg-black border border-white rounded text-white p-4'>Submit</button> */}
+              <input 
+                className='mt-16'
+                placeholder='What should we do?' 
+                onKeyPress={(e) => this.handleIntent(e)}
+              />
             </form>
+            <p className='text-white mt-16'>The answer you seek is: </p>
           </section>
           <section>
           </section>

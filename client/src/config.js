@@ -1,1 +1,3 @@
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:5000';
+
+export const WIT_CLIENT_TOKEN = 'VPQ6T6AJS7BUPCOG5GXUNYDHN6DVJGF7'

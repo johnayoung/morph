@@ -8,7 +8,7 @@ export default function Input({ callback, type = 'text', disabled = false, readO
       readOnly={readOnly}
       placeholder={placeholder}
       onChange={({ target: { value } }) => callback(value)}
-      className='rounded py-2 px-4'
+      className='rounded py-2 px-4 mt-16'
     />
   );
 }
