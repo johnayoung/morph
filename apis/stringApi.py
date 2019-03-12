@@ -3,6 +3,16 @@ from flask import request
 from .strings.capitalize import capitalize
 from .strings.lowercase import lowercase
 from .strings.uppercase import uppercase
+from .strings.pipe import pipeFunctions
+from .strings.words import words
+
+# Required for the pipe functionality to prevent security concerns
+function_mappings = {
+  'capitalize': capitalize,
+  'lowercase': lowercase,
+  'uppercase': uppercase,
+  'words': words
+}
 
 api = Namespace('Strings', description='String related operations')
 
@@ -67,3 +77,38 @@ class Uppercase(Resource):
     input = req_data['input']
     output = uppercase(input)
     return Output(output=output, function='Uppercase')
+
+@api.route('/pipe', methods=['GET'])
+@api.param('input', 'The string input', _in='query')
+@api.param('funcs', 'The left-to-right functions to perform on the input', _in='query')
+@api.response(404, 'Resource not found')
+class Pipe(Resource):
+  @api.doc('string_pipe')
+  @api.marshal_with(string)
+  def get(self):
+    """
+    Performs left-to-right function composition on a string.
+
+    Examples:
+    ----------
+    Request:
+    ```
+    morph.now.sh/strings/pipe?funcs=capitalize,uppercase&input=johnny
+    ```
+
+    Response:
+    ```
+    ['Johnny', 'JOHNNY']
+    ```
+
+    """
+    input = request.args.get('input')
+    funcs = request.args.get('funcs')
+    funcList = funcs.split(',')
+    funcDict = {}
+    for fns in funcList:
+      funcDict[fns] = function_mappings.get(fns)
+    # funcDict = map(lambda: function_mappings.get(x), funcList)
+    print(funcDict)
+    output = pipeFunctions(input, *funcDict.values())
+    return Output(output=output, function='Pipe')
