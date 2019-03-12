@@ -1,0 +1,177 @@
+{
+    "swagger": "2.0",
+    "basePath": "/",
+    "paths": {
+        "/lists/bubble_sort": {
+            "parameters": [
+                {
+                    "in": "body",
+                    "description": "The list input",
+                    "name": "input",
+                    "type": "string"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/List"
+                        }
+                    }
+                },
+                "summary": "Uses bubble sort on a list",
+                "description": "Bubble_sort uses the technique of comparing and swapping.\n\nFunction:\n----------\n```\ndef bubble_sort(lst):\nfor passnum in range(len(lst) - 1, 0, -1):\n    for i in range(passnum):\n        if lst[i] > lst[i + 1]:\n            temp = lst[i]\n            lst[i] = lst[i + 1]\n            lst[i + 1] = temp\n```\n\nExamples:\n----------\n```\nmorph.now.sh/lists/bubble_sort\n\nbody: {\n  \"input\": [1, 2, 3, 4, 5]\n}\n```",
+                "operationId": "list_bubble_sort",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "Lists"
+                ]
+            }
+        },
+        "/strings/capitalize": {
+            "parameters": [
+                {
+                    "in": "body",
+                    "description": "The string input",
+                    "name": "input",
+                    "type": "string"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/String"
+                        }
+                    }
+                },
+                "summary": "Capitalizes the first letter of a string",
+                "description": "Capitalizes the fist letter of the sring and then adds it with rest of the string. Omit the lower_rest parameter to keep the rest of the string intact, or set it to true to convert to lowercase.\n\nFunction:\n----------\n```\ndef capitalize(string, lower_rest=False):\n  return string[:1].upper() + (string[1:].lower() if lower_rest else string[1:])\n```\n\nExamples:\n----------\n```\nmorph.now.sh/strings/capitalize\n\nbody: {\n  \"input\": \"tester\"\n}\n```",
+                "operationId": "string_capitalize",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "Strings"
+                ]
+            }
+        },
+        "/strings/uppercase": {
+            "parameters": [
+                {
+                    "in": "body",
+                    "description": "The string input",
+                    "name": "input",
+                    "type": "string"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/String"
+                        }
+                    }
+                },
+                "summary": "Uppercase all letters of a string",
+                "description": "Convert the given string to upper case",
+                "operationId": "string_uppercase",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "Strings"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Morph",
+        "version": "1.0",
+        "description": "A standardized RESTful Utility API"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "Strings",
+            "description": "String related operations"
+        },
+        {
+            "name": "Lists",
+            "description": "List related operations"
+        }
+    ],
+    "definitions": {
+        "String": {
+            "properties": {
+                "function": {
+                    "type": "string",
+                    "description": "The name of the operation"
+                },
+                "output": {
+                    "type": "string",
+                    "description": "The output of the operation"
+                }
+            },
+            "type": "object"
+        },
+        "List": {
+            "properties": {
+                "function": {
+                    "type": "string",
+                    "description": "The name of the operation"
+                },
+                "output": {
+                    "type": "string",
+                    "description": "The output of the operation"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}

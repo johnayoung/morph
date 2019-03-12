@@ -3,6 +3,7 @@ import Select from 'react-select';
 import Input from './components/Input';
 import API from './api';
 import PARSE from './utils/parseSwagger';
+import {getPath} from './utils/extractPath';
 import * as yup from 'yup';
 
 class App extends Component {
@@ -11,18 +12,16 @@ class App extends Component {
     morphType: '',
     locked: false,
     dataType: '',
-    options: [
-      {value: 'chocolate', label: 'Chocolate'},
-      {value: 'vanilla', label: 'Vanilla'},
-    ]
+    options: []
   }
 
   async componentDidMount() {
     const response = await PARSE();
-    const {data} = response;
-    const {paths} = data;
+    const {paths} = response.data;
     const allPaths = Object.keys(paths).map(path => {
-      return {value: path, label: path}
+      const [,structure,operation] = getPath.exec(path);
+      console.log(structure, operation)
+      return {value: operation, label: operation}
     });
     this.setState({options: allPaths})
 

@@ -1,0 +1,1 @@
+import pathToRegexp from '../../node_modules/path-to-regexp/index';
