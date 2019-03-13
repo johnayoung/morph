@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import Select from 'react-select';
 import Input from './components/Input';
 import API from './api';
@@ -6,15 +6,19 @@ import WIT from './utils/wit';
 import PARSE from './utils/parseSwagger';
 import TOTITLECASE from './utils/toTitleCase';
 import {getPath} from './utils/extractPath';
-import * as yup from 'yup';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.textAreaRef = React.createRef();
+  }
   state = {
     morph: '',
     morphType: '',
     locked: false,
     dataType: '',
-    options: []
+    options: [],
+    copySuccess: ''
   }
 
   async componentDidMount() {
@@ -41,9 +45,10 @@ class App extends Component {
       const {value} = e.target;
       const wit = await WIT(value)
       const intent = wit.data.entities.api_method;
-      const methods = await API(intent[0].value, value);
+      const input = wit.data.entities.input;
+      const methods = await API(intent[0].value, input[0].value);
       this.setState({morph: methods.data.output})
-      console.log(methods.data);
+      console.log(input);
    }
   }
   
@@ -54,6 +59,20 @@ class App extends Component {
     
     console.log(response);
     console.log(response.data);
+  }
+
+  copyToClipboard(e) {
+    this.textAreaRef.select();
+    console.log(this.textAreaRef.current.select());
+    document.execCommand('copy');
+    // This is just personal preference.
+    // I prefer to not show the the whole text area selected.
+    e.target.focus();
+    this.setCopySuccess('Copied!');
+  }
+
+  setCopySuccess(word) {
+    this.setState({copySuccess: word})
   }
 
   render() {
@@ -74,7 +93,11 @@ class App extends Component {
               <p className='text-white mt-4 font-hairline' >Hint: try typing 'uppercase my string'</p>
             </form>
             <p className='text-white mt-16 text-xl'>The answer you seek is: </p>
-            <p className='text-yellow mt-16 text-4xl'>{this.state.morph}</p>
+            <p ref={(textarea) => this.textArea = textarea} className='text-yellow mt-16 text-4xl' value={this.state.morph}>{this.state.morph}</p>
+            <div>
+              <button onClick={this.copyToClipboard}>Copy</button> 
+              {this.state.copySuccess}
+            </div>
           </section>
           <section>
           </section>
