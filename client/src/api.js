@@ -3,7 +3,7 @@ import { API_BASE_URL } from './config';
 
 const api = async (endpoint, input) => {
   const config = {
-    baseURL: `${API_BASE_URL}/api/strings/${endpoint}`,
+    baseURL: `${API_BASE_URL}/strings/${endpoint}`,
     method: 'post',
     data: {
       input

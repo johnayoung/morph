@@ -35,18 +35,15 @@ class App extends Component {
     this.setState({options: allPaths})
   }
 
-  handleInputChange = async val => {
-    const schema = yup.array();
-
-    const parser = await schema.isValid(val);
-    this.setState({morph: val})
-  }
-
   handleIntent = async e => {
     if(e.key === 'Enter'){
+      e.preventDefault();
       const {value} = e.target;
       const wit = await WIT(value)
-      console.log(wit);
+      const intent = wit.data.entities.api_method;
+      const methods = await API(intent[0].value, value);
+      this.setState({morph: methods.data.output})
+      console.log(methods.data);
    }
   }
   
@@ -69,25 +66,15 @@ class App extends Component {
         <main className='mx-auto mt-16 text-center max-w-sm'>
           <section>
             <form onSubmit={this.parseSwagger}>
-              {/* <CustomOption 
-                options={this.state.options}
-                onChange={val => console.log(val)}
-              /> */}
-              <Select
-                autoFocus
-                isMulti
-                closeMenuOnSelect={false}
-                options={this.state.options}
-                placeholder='Choose your morphing mechanism...'
-                onChange={val => console.log(val)}
-              />
               <input 
-                className='mt-16'
+                className='mt-16 rounded py-4 px-4 w-full'
                 placeholder='What should we do?' 
                 onKeyPress={(e) => this.handleIntent(e)}
               />
+              <p className='text-white mt-4 font-hairline' >Hint: try typing 'uppercase my string'</p>
             </form>
-            <p className='text-white mt-16'>The answer you seek is: </p>
+            <p className='text-white mt-16 text-xl'>The answer you seek is: </p>
+            <p className='text-yellow mt-16 text-4xl'>{this.state.morph}</p>
           </section>
           <section>
           </section>

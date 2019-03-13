@@ -27,4 +27,4 @@ class Weather(Resource):
     output = res.json()
     print('res is printing!')
 
-    return Output(output=output, function='Bubble Sort')
+    return Output(output=output, function='Get Weather')
