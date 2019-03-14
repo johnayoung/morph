@@ -3,7 +3,7 @@
   "alias": "morph.now.sh",
   "version": 2,
   "builds": [
-    { "src": "*.py", "use": "@ardent-labs/now-python-wsgi", "config": {"maxLambdaSize": "30mb"} }
+    { "src": "*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"} }
   ],
   "routes": [
     { "src": "/.*", "dest": "/"}
