@@ -7,6 +7,8 @@ from flask_cors import CORS
 from werkzeug.contrib.fixers import ProxyFix
 from capitalize import capitalize
 from uppercase import uppercase
+from lowercase import lowercase
+from byte_size import byte_size
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +17,7 @@ api = Api(app,
     title='Morph',
     version='1.0',
     description='A standardized RESTful Utility API',
+    base_url='https://morph.now.sh/'
 )
 
 class Output(object):
@@ -54,6 +57,32 @@ class strUppercase(Resource):
         input = request.args.get('input')
         output = uppercase(input)
         return Output(output=output, function='Uppercase')
+
+@strings.route('/lowercase')
+@api.param('input', 'The string input', _in='query')
+class strLowercase(Resource):
+    model = api.model('Lower', {
+        'function': fields.String,
+        'output': fields.String,
+    })
+    @api.marshal_with(model)
+    def get(self, **kwargs):
+        input = request.args.get('input')
+        output = lowercase(input)
+        return Output(output=output, function='Lowercase')
+
+@strings.route('/byte_size')
+@api.param('input', 'The string input', _in='query')
+class strByte(Resource):
+    model = api.model('Byte Size', {
+        'function': fields.String,
+        'output': fields.String,
+    })
+    @api.marshal_with(model)
+    def get(self, **kwargs):
+        input = request.args.get('input')
+        output = byte_size(input)
+        return Output(output=output, function='Byte Size')
 
 if __name__ == '__main__':
     app.run(debug=True)
