@@ -52,19 +52,37 @@ The difference, is that you can a natural sentence after input.
 
 Here are some examples of how to use the HTTP API:
 
-*Uppercase the word 'morph'*
-<http://morph.now.sh/morph?input=uppercase morph>
+**Uppercase the word 'morph'**
+
+Request:
+`http://morph.now.sh/morph?input=uppercase morph`
 
 Response:
 ```
-
+{
+  "function": "The almighty Morph",
+  "output": "['MORPH']"
+}
 ```
 
-*Capitalize the sentence 'this is how we do it'*
-<http://morph.now.sh/morph?input=capitalize the sentence 'this is how we do it'>
+**Capitalize the sentence 'this is how we do it'**
 
-*Perform multiple operations on something*
-<http://morph.now.sh/morph?input=capitalize, uppercase, and byte_size the sentence 'this is a sentence'>
+Request:
+`http://morph.now.sh/morph?input=capitalize the sentence 'this is how we do it'`
+
+Response:
+```
+{
+  "function": "The almighty Morph",
+  "output": "['This is how we do it']"
+}
+```
+
+**Perform multiple operations on something**
+
+Request:
+
+`http://morph.now.sh/morph?input=capitalize, uppercase, and byte_size the sentence 'this is a sentence'`
 
 Response:
 ```
