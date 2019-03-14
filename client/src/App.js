@@ -25,8 +25,6 @@ class App extends Component {
   state = {
     morph: '',
     thinking: false,
-    dataType: '',
-    options: [],
     copySuccess: ''
   }
 
@@ -36,14 +34,12 @@ class App extends Component {
       try {
         this.setState({thinking: true})
         const {value} = e.target;
-        const wit = await WIT(value)
-        const intent = wit.data.entities.api_method;
-        const input = wit.data.entities.input;
-        const methods = await API(intent[0].value, input[0].value);
-        this.setState({morph: methods.data.output, thinking: false})
+        const methods = await API(value);
+        const output = methods.data.output
+        this.setState({morph: output, thinking: false})
         console.log(this.textInput);
       } catch (err) {
-        this.setState({morph: 'I am not smart enough for that yet', thinking: false})
+        this.setState({morph: 'I am not smart enough for that...yet', thinking: false})
       }
    }
   }
@@ -81,12 +77,15 @@ class App extends Component {
         <main className='mx-auto mt-16 text-center max-w-sm'>
           <section>
             <form onSubmit={this.parseSwagger}>
-              <input 
-                className='mt-16 rounded py-4 px-4 w-full'
-                placeholder='What should we do?' 
-                onKeyPress={(e) => this.handleIntent(e)}
-              />
-              <p className='text-white mt-4 font-hairline' >Hint: try typing 'uppercase my string'</p>
+              <div className='flex flex-row justify-center align-center items-center'>
+                <span className='inline align-center text-yellow'>https://morph.now.sh/morph/</span>
+                <input 
+                  className='rounded py-2 px-2 w-full'
+                  placeholder='What should we do?' 
+                  onKeyPress={(e) => this.handleIntent(e)}
+                />
+              </div>
+              <p className='text-white mt-4 font-hairline text-sm' >Hint: try typing 'uppercase morph'</p>
             </form>
             <p className='text-white mt-16 text-xl'>The answer you seek is: </p>
             {/* <p ref={this.setTextInputRef} className='text-yellow mt-16 text-4xl'>{this.state.morph}</p> */}
@@ -94,7 +93,7 @@ class App extends Component {
               type='text' 
               value={this.state.thinking ? 'Working on it...' : this.state.morph} 
               ref={this.setTextInputRef} 
-              className='bg-black text-yellow text-4xl text-center w-full'
+              className={`bg-black text-yellow ${(this.state.morph === 'I am not smart enough for that...yet' ? 'text-m' : 'text-4xl')} text-center w-full`}
             />
             {this.state.morph && 
             <div>
