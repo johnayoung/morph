@@ -8,24 +8,29 @@ from werkzeug.contrib.fixers import ProxyFix
 from capitalize import capitalize
 
 app = Flask(__name__)
-CORS(app)
+app.wsgi_app = ProxyFix(app.wsgi_app)
+api = Api(app,
+          version='0.1',
+          title='Our sample API',
+          description='This is our sample API'
+)
 
-print(capitalize('testing yeahhh'))
+@api.route('/hello_world')
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
 
-class Output(object):
-  def __init__(self, output, function):
-    self.output = output
-    self.function = function
-
-@app.route('/strings/capitalize', methods=['POST'])
-def cap():
-    req_data = request.get_json()
-    input = req_data['input']
-    output = {
-        'function': 'Capitalize', 
-        'output': capitalize(input)
-    }
-    return jsonify(output)
+@api.route('/capitalize')
+class Cap(Resource):
+    model = api.model('Capitalize', {
+        'id': fields.Integer,
+        'title': fields.String,
+        'post': fields.String,
+    })
+    @api.marshal_with(model, envelope='resource')
+    def get(self, **kwargs):
+        output = capitalize('diabolical')
+        return output
 
 if __name__ == '__main__':
     app.run(debug=True)
