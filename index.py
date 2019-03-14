@@ -1,16 +1,19 @@
-# app.py
-from flask import Flask
-from flask_restplus import Resource, Api, fields
-from flask.json import jsonify
-from flask import request
-from flask_cors import CORS
-from werkzeug.contrib.fixers import ProxyFix
-from apis import api
+from http.server import BaseHTTPRequestHandler
+import debugserver
+import json
 
-application = Flask(__name__)
-CORS(application)
-application.wsgi_app = ProxyFix(application.wsgi_app)
-api.init_app(application)
+class handler(BaseHTTPRequestHandler):
+
+    def do_GET(self):
+
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+
+        response = {"hello": "world"}
+        self.wfile.write(json.dumps(response).encode("utf-8"))
+
+        return
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    debugserver.serve(handler)
