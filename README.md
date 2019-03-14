@@ -21,6 +21,7 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
+  <a href="#local-testing">Local Testing</a> •
   <a href="#api">API</a> •
   <a href="#the-stack">The Stack</a> •
   <a href="#a-special-thank-you">A Special Thank You</a> •
@@ -42,6 +43,38 @@ API: https://morph.now.sh
 - Fully documented back-end with all available manipulation methods
 
 ## How To Use
+
+The HTTP API may be a bit different than what you have used in the past.
+
+The morph API base url is http://morph.now.sh/morph?input=
+
+The difference, is that you can a natural sentence after input.
+
+Here are some examples of how to use the HTTP API:
+
+*Uppercase the word 'morph'*
+<http://morph.now.sh/morph?input=uppercase morph>
+
+Response:
+```
+
+```
+
+*Capitalize the sentence 'this is how we do it'*
+<http://morph.now.sh/morph?input=capitalize the sentence 'this is how we do it'>
+
+*Perform multiple operations on something*
+<http://morph.now.sh/morph?input=capitalize, uppercase, and byte_size the sentence 'this is a sentence'>
+
+Response:
+```
+{
+    "function": "The almighty Morph",
+    "output": "['This is a sentence', 'THIS IS A SENTENCE', 18]"
+}
+```
+
+## Local Testing
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 

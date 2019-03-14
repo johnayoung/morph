@@ -50,7 +50,8 @@ stringModel = api.model('Strings', {
     'output': fields.String,
 })
 
-@morph.route('/')
+# @morph.route('/')
+@api.route('/morph')
 @api.param('input', 'The string input', _in='query')
 class Morph(Resource):
     @api.marshal_with(stringModel)
