@@ -5,7 +5,7 @@ const api = async (endpoint, input) => {
   const config = {
     baseURL: `https://warm-peak-72707.herokuapp.com/api/endpoints/proxy`,
     headers: {
-      'x-url-string': `https://morph.now.sh/${endpoint}`
+      'x-url-string': `https://morph.now.sh/strings/${endpoint}?input=${input}`
     },
     method: 'get',
   }
