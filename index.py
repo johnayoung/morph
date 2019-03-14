@@ -7,10 +7,10 @@ from flask_cors import CORS
 from werkzeug.contrib.fixers import ProxyFix
 from apis import api
 
-app = Flask(__name__)
-CORS(app)
-app.wsgi_app = ProxyFix(app.wsgi_app)
-api.init_app(app)
+application = Flask(__name__)
+CORS(application)
+application.wsgi_app = ProxyFix(application.wsgi_app)
+api.init_app(application)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
