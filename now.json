@@ -6,6 +6,6 @@
     { "src": "*.py", "use": "@now/python" , "config": { "maxLambdaSize": "10mb" } }
   ],
   "routes": [
-    { "src": "/capitalize", "dest": "/capitalize.py" }
+    { "src": "/strings/capitalize", "dest": "apis/strings/capitalize.py" }
   ]
 }
