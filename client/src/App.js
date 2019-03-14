@@ -1,4 +1,5 @@
 import React, { Component, useRef } from 'react';
+import AutoLink from './components/AutoLink'
 import API from './api';
 import WIT from './utils/wit';
 
@@ -102,7 +103,11 @@ class App extends Component {
             </div>
             }
           </section>
-          <section>
+          <section className='mt-32'>
+            <ul className='list-reset text-white flex justify-center items-center'>
+              <li className='mb-2 p-4'><a className='text-white hover:text-yellow' href='https://morph.now.sh/'>API</a></li>
+              <li className='mb-2 p-4'><a className='text-white hover:text-yellow' href='https://github.com/johnatspreadstreet/morph'>Github</a></li>
+            </ul>
           </section>
         </main>
       </div>
