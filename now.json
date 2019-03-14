@@ -3,10 +3,9 @@
   "alias": "morph.now.sh",
   "version": 2,
   "builds": [
-    { "src": "*.py", "use": "@now/python" , "config": { "maxLambdaSize": "10mb" } },
-    { "src": "api/strings/*.py", "use": "@now/python" , "config": { "maxLambdaSize": "10mb" } }
+    { "src": "*.py", "use": "@now/python" , "config": { "maxLambdaSize": "10mb" } }
   ],
   "routes": [
-    { "src": "/strings/capitalize", "dest": "apis/strings/capitalize.py" }
+    { "src": "/strings/capitalize", "dest": "/capitalize.py" }
   ]
 }
