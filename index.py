@@ -5,12 +5,27 @@ from flask.json import jsonify
 from flask import request
 from flask_cors import CORS
 from werkzeug.contrib.fixers import ProxyFix
-from apis import api
+from capitalize import capitalize
 
-application = Flask(__name__)
-CORS(application)
-application.wsgi_app = ProxyFix(application.wsgi_app)
-api.init_app(application)
+app = Flask(__name__)
+CORS(app)
+
+print(capitalize('testing yeahhh'))
+
+class Output(object):
+  def __init__(self, output, function):
+    self.output = output
+    self.function = function
+
+@app.route('/strings/capitalize', methods=['POST'])
+def cap():
+    req_data = request.get_json()
+    input = req_data['input']
+    output = {
+        'function': 'Capitalize', 
+        'output': capitalize(input)
+    }
+    return jsonify(output)
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    app.run(debug=True)
