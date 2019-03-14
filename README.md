@@ -13,9 +13,12 @@
 </h4>
 
 <p align="center">
-  <img alt="Website" src="https://img.shields.io/website/https/morphapi.com.svg?up_message=up%20and%20running">
+  <a href="https://morphapi.com">
+    <img alt="Website" src="https://img.shields.io/website/https/morphapi.com.svg?up_message=up%20and%20running">
+  </a>
 </p>
 
+![screenshot](https://github.com/johnatspreadstreet/morph/blob/master/Morph-Demo.gif?raw=true)
 
 Website: https://morphapi.com
 

@@ -1,7 +1,6 @@
 import React, { Component, useRef } from 'react';
-import AutoLink from './components/AutoLink'
 import API from './api';
-import WIT from './utils/wit';
+import {turnString} from './utils/types';
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +35,8 @@ class App extends Component {
         const {value} = e.target;
         const methods = await API(value);
         const output = methods.data.output
-        this.setState({morph: output, thinking: false})
+        console.log(turnString(output));
+        this.setState({morph: turnString(output), thinking: false})
         console.log(this.textInput);
       } catch (err) {
         this.setState({morph: 'I am not smart enough for that...yet', thinking: false})
@@ -78,9 +78,9 @@ class App extends Component {
           <section>
             <form onSubmit={this.parseSwagger}>
               <div className='flex flex-row justify-center align-center items-center'>
-                <span className='inline align-center text-yellow'>https://morph.now.sh/morph/</span>
+                <span className='inline align-center text-yellow'>morph.now.sh/morph?input=</span>
                 <input 
-                  className='rounded py-2 px-2 w-full'
+                  className='rounded py-2 px-2'
                   placeholder='What should we do?' 
                   onKeyPress={(e) => this.handleIntent(e)}
                 />

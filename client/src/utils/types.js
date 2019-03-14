@@ -4,3 +4,5 @@ export const getType = v =>
   : v.constructor.name.toLowerCase();
 
 export const castArray = val => (Array.isArray(val) ? val : [val]);
+
+export const turnString = str => JSON.parse(str.replace(/\'/g,"\""));

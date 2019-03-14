@@ -41,6 +41,7 @@ class Output(object):
     self.function = function
 
 # Define API namespaces: Strings, Lists, Math, etc...
+morph = api.namespace('morph', description='The magical Morph operation')
 strings = api.namespace('strings', description='String related operations')
 
 # Define namespace output models
@@ -49,7 +50,7 @@ stringModel = api.model('Strings', {
     'output': fields.String,
 })
 
-@api.route('/morph')
+@morph.route('/')
 @api.param('input', 'The string input', _in='query')
 class Morph(Resource):
     @api.marshal_with(stringModel)
@@ -68,7 +69,6 @@ class Morph(Resource):
         funcDict = {}
         for fns in funcList:
             funcDict[fns] = function_list.get(fns)
-        print(funcDict)
         output = pipeFunctions(input, *funcDict.values())
         # output = capitalize('anything')
         # print(output)
