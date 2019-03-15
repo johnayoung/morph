@@ -96,6 +96,7 @@ uppercase gargantuan
 capitalize diabolical
 lowercase screaming
 what is the byte size of bubbles
+what is the factorial of 5?
 capitalize every word in 'how does this work'
 capitalize, uppercase, and give me the byte size of randomness
 uppercase the sentence 'this is how we do it'

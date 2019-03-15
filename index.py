@@ -83,6 +83,18 @@ class Morph(Resource):
 class strCap(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Capitalizes the first letter of a string.
+
+        Capitalizes the first letter of the string and then adds it with rest of the string. Omit the lower_rest parameter to keep the rest of the string intact, or set it to true to convert to lowercase.
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/capitalize?input=wordtocapitalize
+        ```
+
+        """
         input = request.args.get('input')
         output = capitalize(input)
         return Output(output=output, function='Capitalize')
@@ -92,6 +104,18 @@ class strCap(Resource):
 class strCapAll(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Capitalizes every word in a string.
+
+        Capitalizes all words of the string and then adds it with rest of the string.
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/capitalize_every_word?input=this is how we do it
+        ```
+
+        """
         input = request.args.get('input')
         output = capitalize_every_word(input)
         return Output(output=output, function='Capitalize Every Word')
@@ -101,6 +125,18 @@ class strCapAll(Resource):
 class strUppercase(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Uppercase all letters of a string.
+
+        Convert the given string to upper case
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/uppercase?input=gargantuan
+        ```
+
+        """
         input = request.args.get('input')
         output = uppercase(input)
         return Output(output=output, function='Uppercase')
@@ -110,6 +146,18 @@ class strUppercase(Resource):
 class strLowercase(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Lowercase all letters of a string.
+
+        Convert the given string to lowercase
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/lowercase?input=SCREAMING
+        ```
+
+        """
         input = request.args.get('input')
         output = lowercase(input)
         return Output(output=output, function='Lowercase')
@@ -119,16 +167,40 @@ class strLowercase(Resource):
 class strByte(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Returns the length, or byte size of a string.
+
+        `utf-8` encodes a given string and finds the length.
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/byte_size?input=testing
+        ```
+
+        """
         input = request.args.get('input')
         output = byte_size(input)
         return Output(output=output, function='Byte Size')
 
 # Math related operations
 @math.route('/factorial')
-@api.param('input', 'The string input', _in='query')
+@api.param('input', 'The number input', _in='query')
 class mathFact(Resource):
     @api.marshal_with(stringModel)
     def get(self, **kwargs):
+        """
+        Calculates the factorial of a number.
+
+        Use recursion. If `num` is less than or equal to `1`, return `1`. Otherwise, return the product of `num` and the factorial of `num - 1`. Throws an exception if `num` is a negative or a floating point number.
+
+        Examples:
+        ----------
+        ```
+        morph.now.sh/strings/factorial?input=5
+        ```
+
+        """
         input = int(request.args.get('input'))
         output = factorial(input)
         return Output(output=output, function='Factorial')
