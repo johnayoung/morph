@@ -13,6 +13,7 @@ from uppercase import uppercase
 from lowercase import lowercase
 from byte_size import byte_size
 from pipe import pipeFunctions
+from factorial import factorial
 
 function_list = {
     'capitalize': capitalize,
@@ -43,6 +44,7 @@ class Output(object):
 # Define API namespaces: Strings, Lists, Math, etc...
 morph = api.namespace('morph', description='The magical Morph operation')
 strings = api.namespace('strings', description='String related operations')
+math = api.namespace('math', description='Math related operations')
 
 # Define namespace output models
 stringModel = api.model('Strings', {
@@ -120,6 +122,16 @@ class strByte(Resource):
         input = request.args.get('input')
         output = byte_size(input)
         return Output(output=output, function='Byte Size')
+
+# Math related operations
+@math.route('/factorial')
+@api.param('input', 'The string input', _in='query')
+class mathFact(Resource):
+    @api.marshal_with(stringModel)
+    def get(self, **kwargs):
+        input = int(request.args.get('input'))
+        output = factorial(input)
+        return Output(output=output, function='Factorial')
 
 if __name__ == '__main__':
     app.run(debug=True)

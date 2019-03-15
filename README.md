@@ -46,9 +46,7 @@ API: https://morph.now.sh
 
 The HTTP API may be a bit different than what you have used in the past.
 
-The morph API base url is http://morph.now.sh/morph?input=
-
-The difference, is that you can a natural sentence after input.
+The morph API base url is http://morph.now.sh/morph?input=. The difference, is that you can use a natural sentence in the request url.
 
 Here are some examples of how to use the HTTP API:
 
@@ -91,6 +89,16 @@ Response:
     "output": "['This is a sentence', 'THIS IS A SENTENCE', 18]"
 }
 ```
+
+**Commands to try**
+
+uppercase gargantuan
+capitalize diabolical
+lowercase screaming
+what is the byte size of bubbles
+capitalize every word in 'how does this work'
+capitalize, uppercase, and give me the byte size of randomness
+uppercase the sentence 'this is how we do it'
 
 ## Local Testing
 
@@ -165,6 +173,14 @@ Here are some lessons learned:
 - CORS (Cross Origin Resource Sharing) is a giant headache in ANY language
 - Now 2.0 (formerly Zeit) is an incredibly cool concept, but should not be used for a Python backend just yet (~March 2019)
 - Wit.ai makes NLP significantly easier to understand and implement
+
+I find the 'gotcha!' aspects of programming languages to be the most difficult to learn when switching. For example, people switching to JavaScript from another language may find the bracket syntax to be awkward. Python had a few 'gotcha!'s for me:
+
+- The import syntax was not easy for me to pick up. It took me a significant amount of time to learn the differences between modules, packages, where to include __init__ files, etc.
+- Anything with deployment (for any language) can be a headache
+- Trying to reason between Python 2x and Python 3x
+- I still do not understand how a venv works, or even the point of it
+- I was never able to get a linter working, and still not sure why (maybe existing ESLint is screwing it up?)
 
 ## A Special Thank You
 A very big thank you goes out to the following individuals who helped me create Morph. It would not have been possible without you:
