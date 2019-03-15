@@ -20,7 +20,8 @@ function_list = {
     'capitalize_every_word': capitalize_every_word,
     'uppercase': uppercase,
     'lowercase': lowercase,
-    'byte_size': byte_size
+    'byte_size': byte_size,
+    'factorial': factorial
 }
 
 app = Flask(__name__)
