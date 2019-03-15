@@ -93,12 +93,19 @@ Response:
 **Commands to try**
 
 uppercase gargantuan
+
 capitalize diabolical
+
 lowercase SCREAMING
+
 what is the byte size of bubbles
+
 capitalize every word in 'how does this work'
+
 uppercase the sentence 'this is how we do it'
+
 capitalize, uppercase, and give me the byte size of randomness
+
 *ALPHA* what is the factorial of 5?
 
 ## Local Testing
